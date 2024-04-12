@@ -30,7 +30,7 @@ for(let i = 0; i < 11; i++){
 let cuenta = 10
 
 while(cuenta < 55+1){
-    if(cuenta != 16 && (cuenta % 2) == 0 && (cuenta % 3 == 0)){
+    if(cuenta != 16 && (cuenta % 2) == 0 && (cuenta % 3 !== 0)){
         console.log(cuenta);
     }
     cuenta++;
