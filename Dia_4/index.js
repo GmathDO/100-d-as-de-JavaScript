@@ -1,4 +1,3 @@
-console.time("carlos")
 function esAnagrama(string1, string2){
     if(string1 !== string2){
         if(string1.length === string2.length){
@@ -23,5 +22,18 @@ function esAnagrama(string1, string2){
     }
 }
 
-console.log(esAnagrama("botines","bisonto"))
-console.timeEnd("carlos")
+console.log(esAnagrama("botines","bisonte"))
+
+//solucion eficiente
+
+function esAnagramaV2(string1, string2){
+    if(string1 != string2){
+        const lista1 = string1.toLowerCase().split("").sort()
+        const lista2 = string2.toLowerCase().split("").sort()
+        return lista1.toString() === lista2.toString()
+    } else {
+        return false
+    }
+}
+
+console.log(esAnagramaV2("botines","bisonte"))
