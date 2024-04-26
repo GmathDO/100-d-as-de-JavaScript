@@ -44,23 +44,39 @@ function aCodigoMorse(texto){
         "/": "-..-."
       };
     
-    
-    let index = 0
-    let textoC = texto.replaceAll(" ", "|")
-    let textoMorse = textoC
-    for(let i = textoC.length; i != 0; i--){
-        if(i == 1){
-            textoMorse = textoMorse.replace(textoC[index], diccionarioMorse[textoC[index]])
-        } else if(textoC[index] === "|"){
-            textoMorse = textoMorse.replace(textoC[index], "  ")
-        } else if(textoC[index+1] === "|"){
-            textoMorse = textoMorse.replace(textoC[index], diccionarioMorse[textoC[index]])
-        } else{
-            textoMorse = textoMorse.replace(textoC[index], `${diccionarioMorse[textoC[index]]} `)
+    if(/[A-Za-z0-9]/g.test(texto)){
+        let index = 0
+        let textoC = texto.toLowerCase().replaceAll(" ", "|")
+        let textoMorse = textoC
+        for(let i = textoC.length; i != 0; i--){
+            if(i == 1){
+                textoMorse = textoMorse.replace(textoC[index], diccionarioMorse[textoC[index]])
+            } else if(textoC[index] === "|"){
+                textoMorse = textoMorse.replace(textoC[index], "  ")
+            } else if(textoC[index+1] === "|"){
+                textoMorse = textoMorse.replace(textoC[index], diccionarioMorse[textoC[index]])
+            } else{
+                textoMorse = textoMorse.replace(textoC[index], `${diccionarioMorse[textoC[index]]} `)
+            }
+            index++
         }
-        index++
+        console.log(textoMorse)
+    } else{
+        let index = 0;
+        let textoC = texto.replaceAll("  "," | ").split(" ");
+        let textoNatural = "";
+        for(let i = textoC.length; i != 0; i--){
+            if(Object.values(diccionarioMorse).includes(textoC[index])){
+                let valueIndex = Object.values(diccionarioMorse).indexOf(textoC[index])
+                textoNatural = textoNatural + Object.keys(diccionarioMorse)[valueIndex]
+            } else if(textoC[index] === "|"){
+                textoNatural = textoNatural + " "
+            }
+            index++
+        }
+        console.log(textoNatural)
     }
-    console.log(textoMorse)
 }
 
-aCodigoMorse("hola que tal")
+aCodigoMorse("hola que tal?")
+aCodigoMorse(".... --- .-.. .-  --.- ..- .  - .- .-.. ..--..")
