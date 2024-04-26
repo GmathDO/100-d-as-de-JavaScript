@@ -44,8 +44,8 @@ function aCodigoMorse(texto){
         "/": "-..-."
       };
     
+    let index = 0;
     if(/[A-Za-z0-9]/g.test(texto)){
-        let index = 0
         let textoC = texto.toLowerCase().replaceAll(" ", "|")
         let textoMorse = textoC
         for(let i = textoC.length; i != 0; i--){
@@ -62,7 +62,6 @@ function aCodigoMorse(texto){
         }
         console.log(textoMorse)
     } else{
-        let index = 0;
         let textoC = texto.replaceAll("  "," | ").split(" ");
         let textoNatural = "";
         for(let i = textoC.length; i != 0; i--){
