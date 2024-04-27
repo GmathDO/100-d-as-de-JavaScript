@@ -1,0 +1,3 @@
+function equilibrada(expresion){
+    
+}
