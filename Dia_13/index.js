@@ -1,44 +1,21 @@
-function equilibrada(expresion){
-    let apertura = {"llave": [], "corchete": [], "parentesis": []}
-    let cierre = {"llave": [], "corchete": [], "parentesis": []}
-    const lista = expresion.split("")
-    let orden = 0;
-    for(simbolo in {"{": null,"[": null,"(":null}){
-        let idx = lista.indexOf(simbolo);
-        while (idx != -1) {
-            apertura[Object.keys(apertura)[orden]].push(idx);
-            idx = lista.indexOf(simbolo, idx + 1);
+function esEquilibrada(expresion){
+    const simbolos = {"{": "}", "[": "]", "(": ")"};
+    let lista = [];
+    let index = 0;
+    for(let i = expresion.length; i != 0; i--){
+        if(simbolos[expresion.split("")[index]]){
+            lista.push(expresion.split("")[index])
+        } else if(Object.values(simbolos).includes(expresion.split("")[index])){
+            if(lista.length === 0 || expresion.split("")[index] != simbolos[lista.pop(expresion.split("")[index])]){
+                console.log("La expresion no está equilibrada")
+                return false
+            }
         }
-        orden++
-    }
-    orden = 0;
-    for(simbolo in {"}": null,"]": null,")":null}){
-        let idx = lista.indexOf(simbolo);
-        while (idx != -1) {
-            cierre[Object.keys(cierre)[orden]].push(idx);
-            idx = lista.indexOf(simbolo, idx + 1);
-        }
-        orden++
-    }
-    for(key in apertura){
-        let index = 0;
-        if(apertura[key].length != cierre[key].length){
-            console.log("La expresion no esta equilibrada")
-            break
-        }
-    }
+        index++
+    };
+    console.log("La expresion está equilibrada")
+    return lista.length == 0;
 }
 
-equilibrada("{ [ a * ( c + d ) ] - 5 }")
-
-
-
-
-
-
-
-
-
-
-
-
+esEquilibrada("{ [ a * ( c + d ) ] - 5 }")
+esEquilibrada("{ a * ( c + d ) ] - 5 }")
